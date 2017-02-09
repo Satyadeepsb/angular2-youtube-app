@@ -1,0 +1,50 @@
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Title</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="#video of videos" (click)="onSelect(video)" >
+        <td>{{video.id}}</td>
+        <td>{{video.title}}</td>
+        <td>{{video.desc}}</td>
+    </tr>
+    </tbody>
+</table>
+<!--
+<div *ngIf="showVideo">
+    <iframe  [src]="url"
+            width="560" height="315" frameborder="0" allowfullscreen></iframe>
+</div>
+<button class="btn btn-primary" (click)="toggleVideo()">
+    <span *ngIf="showVideo">Hide</span>
+    <span *ngIf="!showVideo">Show</span>
+    Video
+</button>
+-->
+
+<form>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="id">ID</label>{{id}}
+            <input type="number" class="form-control" id="id" [(ngModel)]="id">
+        </div>
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" [(ngModel)]="title">
+        </div>
+        <div class="form-group">
+            <label for="desc">Description:</label>
+            <input type="text" class="form-control" id="desc" [(ngModel)]="desc">
+        </div>
+        <div class="form-group">
+            <label for="link">Link:</label>
+            <input type="text" class="form-control" id="link" [(ngModel)]="videoCode">
+        </div>
+
+        <button type="submit" class="btn btn-default" (click)="addVideo(id,title,desc,videoCode)">Submit</button>
+    </div>
+</form>

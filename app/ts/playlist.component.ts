@@ -1,43 +1,48 @@
-import {Component,Input} from 'angular2/core';
-import {Video} from './video';
-import {AppComponent} from  './app.component';
-import {OnInit} from "angular2/src/core/linker/interfaces";
+/**
+ * Created by SARAL TECH on 2/10/2017.
+ */
+
+import { Component, OnInit } from '@angular/core';
+import {Service} from "./service";
+import {Video} from "./video";
+import {YoutubeService} from "./youtube.service";
 
 @Component({
-        selector: 'playlist',
-        templateUrl: 'app/ts/playlist.component.html',
-        inputs : ['videos']
+    selector: 'playlist',
+    templateUrl: 'playlist.component.html',
+    providers : [Service, YoutubeService],
 
 })
+export class PlaylistComponent {
+  showVideo: boolean = false;
+  url : string = 'https://www.youtube.com/embed/fXHyqSIIF9Q';
+  videos : any[];
+  v  : Video;
+  selectedVId : string;
 
-export class PlaylistComponent implements OnInit{
 
-    showVideo: boolean = false;
-    url : string = 'https://www.youtube.com/embed/fXHyqSIIF9Q';
-    v : AppComponent;
-    ngOnInit() {
-        console.log(); // object here
-    }
+  constructor(private service : Service,private youtube : YoutubeService){
+    this.videos = this.service.demoVideos;
+    this.v = new Video(undefined,"","","");
+  }
 
-    onSelect(vid:Video){
-        console.log(JSON.stringify(vid));
-        this.showVideo = true;
-        this.url += vid.videoCode;
-        console.log(this.url);
-    }
 
-    toggleVideo(){
-        console.log(this.showVideo);
-        (this.showVideo == true) ? this.showVideo = false : this.showVideo = true;
-    }
+  onSelect(vid:Video){
+    this.showVideo = true;
+    this.v = vid;
+    console.log("---");
+    console.log(this.v);
 
-    addVideo(id: number,title : string, desc : string, code : string){
+  }
 
-        console.log(this.v.videos);
-        let myVideo = new Video(id,title,desc,code);
+  toggleVideo(){
+    console.log(this.showVideo);
+    (this.showVideo == true) ? this.showVideo = false : this.showVideo = true;
+  }
 
-       /// videos.push(myVideo);
-        console.log(myVideo);
+  addVideo(){
+    this.service.demoVideos.push(this.v);
+  }
 
-    }
+
 }

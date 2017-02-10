@@ -1,7 +1,6 @@
 /**
- * Created by SARAL TECH on 2/9/2017.
+ * Created by SARAL TECH on 2/10/2017.
  */
-
 export class Config{
-    static MAIN_HEADING : string = "My Fav Video";
+  static MAIN_HEADING : string = "My Fav Video";
 }
